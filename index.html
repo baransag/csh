@@ -1283,7 +1283,7 @@ footer{
         <span>Shop #15, Shaheed-e-Millat Market, Gulistan Colony #02, Main Sheikhupura Road, Faisalabad.</span>
       </div>
       <div class="map-frame">
-        <iframe src="https://www.google.com/maps?q=Jhang,Punjab,Pakistan&output=embed" loading="lazy" title="Location map"></iframe>
+        <iframe src="https://www.google.com/maps?q=Shop+%2315%2C+Shaheed-e-Millat+Market%2C+Gulistan+Colony+%2302%2C+Main+Sheikhupura+Road%2C+Faisalabad%2C+Punjab%2C+Pakistan&output=embed" loading="lazy" title="Location map"></iframe>
       </div>
     </div>
     <div class="contact-form reveal">
@@ -1554,16 +1554,21 @@ const PRODUCTS = [
     applications:"Flat roofs, terraces, basements and large-scale waterproofing projects.",
     usage:"Torch-apply over a primed surface with 100mm overlaps, ensuring full bond and no air pockets.",
     safety:"Use torch application with proper fire safety precautions and ventilation." },
-  { id:15, name:"DPC Membrane Roll", cat:"Bitumen Membrane", group:"Bitumen Membranes", price:null, packing:"1 Meter × 10 Meter Roll", rating:4.5, reviews:20, stock:"In Stock", tags:[],
-    img:"image/dpc-membrane-roll.jpeg", desc:"A self-adhesive bitumen membrane roll for foundation damp-proofing and plinth-level protection, offering quick, torch-free installation.",
-    applications:"Foundation damp proofing, plinth level protection, wall bases.",
-    usage:"Peel the release film and press firmly onto a clean, primed surface, overlapping seams by 75–100mm.",
-    safety:"Best applied above 5°C; store rolls flat away from direct heat." },
   { id:16, name:"Waterproof Tape", cat:"Flashing Tape", group:"Waterproofing", price:null, packing:"100mm × 10 Meter Roll", rating:4.4, reviews:24, stock:"In Stock", tags:[],
     img:"image/waterproof-tape.jpeg", desc:"A self-adhesive butyl rubber flashing tape for fast, reliable repairs to roof flashings, pipe joints and gutter seams.",
     applications:"Roof flashing, pipe joints, gutter seams, quick leak repairs.",
     usage:"Clean and dry the surface, peel backing and press firmly along the joint, overlapping edges by 25mm.",
-    safety:"Apply to a dry surface for best adhesion. No special PPE required." }
+    safety:"Apply to a dry surface for best adhesion. No special PPE required." },
+  { id:17, name:"SikaCeram®-850", cat:"Tile Adhesive", group:"Construction Chemicals", price:4000, packing:"420 Gram Pack", rating:4.6, reviews:0, stock:"In Stock", tags:["new"],
+    img:"image/sikaceram-850.jpeg", desc:"SikaCeram®-850 is a high-performance polymer-modified tile adhesive designed for fixing ceramic, porcelain, and vitrified tiles on floors and walls. It provides excellent bonding strength, water resistance, and long-lasting durability for residential and commercial applications.",
+    applications:"Fixing ceramic, porcelain and vitrified tiles on floors and walls, residential and commercial applications.",
+    usage:"Mix with water as per label ratio to a lump-free paste, apply with a notched trowel and fix tiles within open time.",
+    safety:"Wear gloves and eye protection when mixing. Keep away from children." },
+  { id:18, name:"Injection Packer", cat:"Waterproofing Accessories", group:"Waterproofing", price:null, packing:"Available in Different Sizes", rating:0, reviews:0, stock:"Coming Soon", tags:[], comingSoon:true,
+    img:"image/injection-packer.jpeg", desc:"Injection Packers are used for pressure injection during waterproofing and crack repair applications. They are available in multiple sizes for different construction and repair requirements.",
+    applications:"Pressure injection during waterproofing and crack repair applications.",
+    usage:"Install into pre-drilled holes along the crack or joint before connecting to injection equipment.",
+    safety:"Follow injection equipment manufacturer guidelines. Use appropriate PPE." }
 ];
 
 const TESTIMONIALS = [
@@ -1838,6 +1843,7 @@ function starString(rating){
   return '★'.repeat(full) + '☆'.repeat(5-full);
 }
 function priceLabel(p){
+  if(p.comingSoon) return 'Coming Soon';
   return p.price===null ? 'Price on Request' : ('Rs.'+p.price);
 }
 function renderProducts(filter){
@@ -1849,7 +1855,7 @@ function renderProducts(filter){
         <div class="p-tags">
           ${p.tags.includes('new')?'<span class="p-tag new">New</span>':''}
           ${p.tags.includes('best')?'<span class="p-tag best">Best Seller</span>':''}
-          ${p.price===null?'<span class="p-tag request">Price on Request</span>':''}
+          ${p.comingSoon?'<span class="p-tag request">Coming Soon</span>':(p.price===null?'<span class="p-tag request">Price on Request</span>':'')}
         </div>
         <div class="p-quick-actions">
           <button class="p-qa-btn qv-open" data-id="${p.id}" title="Quick View"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/></svg></button>
@@ -1866,19 +1872,19 @@ function renderProducts(filter){
         <h4 class="p-name">${p.name}</h4>
         <div class="p-desc">${p.desc}</div>
         <div class="p-packing">Packing: ${p.packing}</div>
-        <div class="p-rating"><span class="stars">${starString(p.rating)}</span><span>(${p.reviews})</span></div>
+        ${p.comingSoon? '' : `<div class="p-rating"><span class="stars">${starString(p.rating)}</span><span>(${p.reviews})</span></div>`}
         <div class="p-price-row">
           <div>
-            <div class="p-price ${p.price===null?'request':''}">${priceLabel(p)}</div>
+            <div class="p-price ${(p.price===null)?'request':''}">${priceLabel(p)}</div>
           </div>
-          ${p.price!==null?`<button class="p-add" data-id="${p.id}" title="Add to Cart" style="width:40px;height:40px;border-radius:50%;background:var(--grad-primary);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          ${(p.price!==null && !p.comingSoon)?`<button class="p-add" data-id="${p.id}" title="Add to Cart" style="width:40px;height:40px;border-radius:50%;background:var(--grad-primary);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg viewBox="0 0 24 24" width="17" height="17" stroke="currentColor" fill="none" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
           </button>`:''}
         </div>
         <span class="p-stock ${p.stock==='Low Stock'?'low':''}">${p.stock}</span>
         <div class="p-actions-row">
           <button class="p-btn view" data-id="${p.id}" data-act="view">View Details</button>
-          ${p.price!==null?`
+          ${(p.price!==null && !p.comingSoon)?`
             <button class="p-btn buy" data-id="${p.id}" data-act="buy">Buy Now</button>
             <button class="p-btn checkout" data-id="${p.id}" data-act="checkout">Checkout</button>
           `:`
@@ -1921,7 +1927,7 @@ function toggleWishlist(id, btn){
 
 function addToCart(id, qty){
   const p = PRODUCTS.find(x=>x.id===id);
-  if(!p || p.price===null) return;
+  if(!p || p.price===null || p.comingSoon) return;
   const existing = cart.find(c=>c.id===id);
   if(existing) existing.qty += qty;
   else cart.push({id:p.id, name:p.name, price:p.price, img:p.img, qty:qty});
@@ -1989,7 +1995,7 @@ function buyNow(id){
 
 function checkoutDirect(id){
   const p = PRODUCTS.find(x=>x.id===id);
-  if(!p || p.price===null) return;
+  if(!p || p.price===null || p.comingSoon) return;
   cart = [{id:p.id, name:p.name, price:p.price, img:p.img, qty:1}];
   updateCartUI();
   directCheckoutMode = true;
@@ -2013,7 +2019,7 @@ function openQuickView(id){
       <div class="qv-body">
         <div class="p-cat">${p.cat} · ${p.group}</div>
         <h3>${p.name}</h3>
-        <div class="p-rating"><span class="stars">${starString(p.rating)}</span><span>${p.rating} (${p.reviews} reviews)</span></div>
+        ${p.comingSoon? '' : `<div class="p-rating"><span class="stars">${starString(p.rating)}</span><span>${p.rating} (${p.reviews} reviews)</span></div>`}
         <div class="qv-price"><span class="now">${priceLabel(p)}</span></div>
         <span class="p-stock ${p.stock==='Low Stock'?'low':''}">${p.stock}</span>
         <div class="qv-tabs">
@@ -2033,14 +2039,15 @@ function openQuickView(id){
           <p style="margin-top:12px;"><b>Downloads:</b> Technical Data Sheet available on request via WhatsApp.</p>
         </div>
         <div class="qv-panel" data-panel="reviews">
+          ${p.comingSoon? '<p>This product is coming soon — reviews will appear once it is available.</p>' : `
           <p>"${p.rating>=4.7?'Excellent performance, will reorder.':'Solid product, good value for the price.'}" — Verified Buyer</p>
-          <p style="margin-top:12px;">${p.reviews} contractors and homeowners have reviewed this product with an average of ${p.rating}★.</p>
+          <p style="margin-top:12px;">${p.reviews} contractors and homeowners have reviewed this product with an average of ${p.rating}★.</p>`}
         </div>
         <div class="qv-panel" data-panel="faq">
           <p><b>Q:</b> What's the packing size?<br><b>A:</b> ${p.packing}. Bulk packaging is available on request.</p>
           <p style="margin-top:12px;"><b>Q:</b> Is bulk pricing available?<br><b>A:</b> Yes, message us on WhatsApp for contractor/bulk rates.</p>
         </div>
-        ${p.price!==null?`
+        ${(p.price!==null && !p.comingSoon)?`
         <div class="qv-qty">
           <div class="qty-box">
             <button onclick="stepQty(-1)">−</button><input type="text" id="qvQty" value="1" readonly><button onclick="stepQty(1)">+</button>
