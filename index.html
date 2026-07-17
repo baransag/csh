@@ -253,7 +253,8 @@ y.parentNode.insertBefore(t,y);
         { "@type": "ListItem", "position": 13, "item": { "@type": "Product", "name": "Sikalatex 200 SBR", "category": "Bonding Agent", "description": "SBR polymer latex for bonding coats, waterproof plaster and repair mortars.", "image": "https://constructionsolutionshub.com.pk/image/sikalatex-200-sbr.jpeg", "offers": { "@type": "Offer", "priceCurrency": "PKR", "price": "850", "availability": "https://schema.org/InStock", "url": "https://constructionsolutionshub.com.pk/#shop" }, "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.6", "reviewCount": "15" } } },
         { "@type": "ListItem", "position": 14, "item": { "@type": "Product", "name": "Waterproof Tape", "category": "Flashing Tape", "description": "Self-adhesive waterproof flashing tape for roof edges, joints, cracks and window frames.", "image": "https://constructionsolutionshub.com.pk/image/waterproof-tape.jpeg", "offers": { "@type": "Offer", "priceCurrency": "PKR", "price": "2250", "availability": "https://schema.org/InStock", "url": "https://constructionsolutionshub.com.pk/#shop" }, "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.4", "reviewCount": "24" } } },
         { "@type": "ListItem", "position": 15, "item": { "@type": "Product", "name": "SikaCeram\u00ae-850", "category": "Tile Adhesive", "description": "High-performance polymer-modified tile adhesive for ceramic, porcelain and vitrified tiles.", "image": "https://constructionsolutionshub.com.pk/image/sikaceram-850.jpeg", "brand": { "@type": "Brand", "name": "Sika" }, "offers": { "@type": "Offer", "priceCurrency": "PKR", "price": "4000", "availability": "https://schema.org/InStock", "url": "https://constructionsolutionshub.com.pk/#shop" } } },
-        { "@type": "ListItem", "position": 16, "item": { "@type": "Product", "name": "Injection Packer", "category": "Waterproofing Accessories", "description": "Injection packers for pressure injection during waterproofing and crack repair.", "image": "https://constructionsolutionshub.com.pk/image/injection-packer.jpeg", "offers": { "@type": "Offer", "priceCurrency": "PKR", "availability": "https://schema.org/InStock", "url": "https://constructionsolutionshub.com.pk/#shop" } } }
+        { "@type": "ListItem", "position": 16, "item": { "@type": "Product", "name": "Injection Packer", "category": "Waterproofing Accessories", "description": "Injection packers for pressure injection during waterproofing and crack repair.", "image": "https://constructionsolutionshub.com.pk/image/injection-packer.jpeg", "offers": { "@type": "Offer", "priceCurrency": "PKR", "availability": "https://schema.org/InStock", "url": "https://constructionsolutionshub.com.pk/#shop" } } },
+        { "@type": "ListItem", "position": 17, "item": { "@type": "Product", "name": "Fischer FIS EB II 390 S", "category": "Construction Chemicals", "description": "Heavy-duty epoxy-based chemical injection mortar for high-load anchoring in concrete, structural steel connections and industrial construction applications.", "image": "https://constructionsolutionshub.com.pk/image/Fischer FIS.jpeg", "brand": { "@type": "Brand", "name": "Fischer" }, "offers": { "@type": "Offer", "priceCurrency": "PKR", "price": "11000", "availability": "https://schema.org/InStock", "url": "https://constructionsolutionshub.com.pk/products/fischer-fis-eb-ii-390-s" }, "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "6" } } }
       ]
     }
   ]
@@ -1822,7 +1823,12 @@ const PRODUCTS = [
     img:"image/injection-packer.jpeg", desc:"Injection Packers are used for pressure injection during waterproofing and crack repair applications. Available in multiple sizes for different construction and waterproofing requirements.",
     applications:"Pressure injection during waterproofing and crack repair applications.",
     usage:"Install into pre-drilled holes along the crack or joint before connecting to injection equipment.",
-    safety:"Follow injection equipment manufacturer guidelines. Use appropriate PPE." }
+    safety:"Follow injection equipment manufacturer guidelines. Use appropriate PPE." },
+  { id:19, name:"Fischer FIS EB II 390 S", cat:"Chemical Anchor", group:"Construction Chemicals", price:11000, packing:"390 ML", rating:4.8, reviews:6, stock:"In Stock", tags:["new"],
+    img:"image/Fischer FIS.jpeg", desc:"Fischer FIS EB II 390 S is a heavy-duty epoxy-based chemical injection mortar engineered for high-load anchoring in concrete, structural steel connections and industrial construction applications.",
+    applications:"Structural steel connections, heavy machinery anchoring, rebar dowelling, façade fixings, industrial and infrastructure projects.",
+    usage:"Clean the drilled hole thoroughly, insert the static mixer nozzle and dispense mortar from the base of the hole outward, then insert the anchor rod with a slight twisting motion and allow full cure time before loading.",
+    safety:"Wear gloves and eye protection. Ensure adequate ventilation during use." }
 ];
 
 const TESTIMONIALS = [
@@ -2119,10 +2125,6 @@ function renderProducts(filter){
         <img src="${p.img}" alt="${p.name} - ${p.cat} | Construction Solutions Hub" width="400" height="230" loading="lazy" decoding="async">
       </div>
       <div class="p-body">
-        <div class="p-cat-row">
-          <div class="p-cat">${p.cat}</div>
-          <span class="p-group-badge">${p.group}</span>
-        </div>
         <h4 class="p-name">${p.name}</h4>
         <div class="p-desc">${p.desc}</div>
         <div class="p-packing">Packing: ${p.packing}</div>
