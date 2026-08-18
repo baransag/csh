@@ -1345,6 +1345,7 @@ footer{
       <a href="#shop" class="btn btn-primary">Explore Products →</a>
       <a href="https://wa.me/923008661670" target="_blank" rel="noopener" class="btn btn-ghost">WhatsApp Us</a>
     </div>
+    <div style="margin-top:18px;font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--primary);opacity:0;animation:fadeUp 1s var(--ease-soft) 1s forwards;">One Step Shopping</div>
     <div class="hero-stats">
       <div class="hero-stat"><b data-count="12">0</b><span>Years Experience</span></div>
       <div class="hero-stat"><b data-count="4800">0</b><span>Projects Sealed</span></div>
@@ -1747,6 +1748,7 @@ footer{
 /* ==========================================================================
    DATA — PRODUCTS (prices in PKR, packing shown per spec section)
    ========================================================================== */
+const PLACEHOLDER_IMG = "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22400%22%20height%3D%22230%22%20viewBox%3D%220%200%20400%20230%22%3E%3Crect%20width%3D%22400%22%20height%3D%22230%22%20fill%3D%22%23eef3f7%22/%3E%3Crect%20x%3D%221%22%20y%3D%221%22%20width%3D%22398%22%20height%3D%22228%22%20fill%3D%22none%22%20stroke%3D%22%23c9d7e0%22%20stroke-width%3D%222%22/%3E%3Ctext%20x%3D%22200%22%20y%3D%22105%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2215%22%20font-weight%3D%22700%22%20fill%3D%22%235c7d94%22%20text-anchor%3D%22middle%22%3EProduct%20Image%3C/text%3E%3Ctext%20x%3D%22200%22%20y%3D%22128%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2212%22%20fill%3D%22%2384a0b2%22%20text-anchor%3D%22middle%22%3EComing%20Soon%3C/text%3E%3C/svg%3E";
 const PRODUCTS = [
   { id:1, name:"ConAD WP-5000", cat:"Concrete & Mortar Additives", group:"Waterproofing", price:250, packing:"1 KG", stock:"In Stock", tags:["best"],
     alt:"ConAD WP-5000 integral waterproofing admixture 1kg pack",
@@ -1844,7 +1846,13 @@ const PRODUCTS = [
     img:"image/Fischer FIS.jpeg", desc:"Fischer FIS EB II 390 S is a heavy-duty epoxy-based chemical injection mortar engineered for high-load structural anchoring in concrete. Dispensed from a 390ml cartridge, it is used by engineers and construction contractors in Pakistan for chemical anchoring in structural steel connections and industrial construction applications where reliable load-bearing fixings are required.",
     applications:"Structural steel connections, heavy machinery anchoring, rebar dowelling, façade fixings, industrial and infrastructure projects.",
     usage:"Clean the drilled hole thoroughly, insert the static mixer nozzle and dispense mortar from the base of the hole outward, then insert the anchor rod with a slight twisting motion and allow full cure time before loading.",
-    safety:"Wear gloves and eye protection. Ensure adequate ventilation during use." }
+    safety:"Wear gloves and eye protection. Ensure adequate ventilation during use." },
+  { id:20, name:"Ultra Seal", cat:"Waterproofing", group:"Waterproofing", price:2950, packing:"16 KG", stock:"In Stock", tags:[],
+    alt:"Ultra Seal 16kg pack", img:"image/ultra-seal-grey.png", desc:"", applications:"", usage:"", safety:"" },
+  { id:21, name:"Sika Seal 105", cat:"Waterproofing", group:"Waterproofing", price:3800, packing:"12.5 KG", stock:"In Stock", tags:[],
+    alt:"Sika Seal 105 12.5kg pack", img:"image/sikaseal-105.png", desc:"", applications:"", usage:"", safety:"" },
+  { id:22, name:"Tuf Coat 90", cat:"Waterproofing", group:"Waterproofing", price:5000, packing:"2.5 KG", stock:"In Stock", tags:[],
+    alt:"Tuf Coat 90 2.5kg pack", img:"image/tuf-coat-90.png", desc:"", applications:"", usage:"", safety:"" }
 ];
 
 const TESTIMONIALS = [
@@ -2137,7 +2145,7 @@ function renderProducts(filter){
       </div>
       <div class="p-body">
         <h4 class="p-name">${p.name}</h4>
-        <div class="p-desc">${p.desc}</div>
+        <div class="p-desc">${p.desc || 'Full product details available on request via WhatsApp.'}</div>
         <div class="p-packing">Packing: ${p.packing}</div>
         <div class="p-price-row">
           <div>
@@ -2346,13 +2354,13 @@ function openQuickView(id){
           <div class="qv-tab" data-tab="faq">FAQ</div>
         </div>
         <div class="qv-panel active" data-panel="specs">
-          <p>${p.desc}</p>
+          <p>${p.desc || 'Full product details available on request via WhatsApp.'}</p>
           <ul><li><span>Packing</span><span>${p.packing}</span></li></ul>
-          <p style="margin-top:12px;"><b>Applications:</b> ${p.applications}</p>
+          <p style="margin-top:12px;"><b>Applications:</b> ${p.applications || 'Available on request via WhatsApp.'}</p>
         </div>
         <div class="qv-panel" data-panel="usage">
-          <p><b>Usage:</b> ${p.usage}</p>
-          <p style="margin-top:12px;"><b>Safety:</b> ${p.safety}</p>
+          <p><b>Usage:</b> ${p.usage || 'Available on request via WhatsApp.'}</p>
+          <p style="margin-top:12px;"><b>Safety:</b> ${p.safety || 'Available on request via WhatsApp.'}</p>
           <p style="margin-top:12px;"><b>Downloads:</b> Technical Data Sheet available on request via WhatsApp.</p>
         </div>
         <div class="qv-panel" data-panel="faq">
