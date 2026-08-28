@@ -1898,6 +1898,10 @@ const BRANDS = ["ConAD","HORSE","Sikalite","DPC Pro","SwellTech","PU Systems","T
    STATE
    ========================================================================== */
 let cart = [];
+try {
+  const saved = localStorage.getItem('csh_cart');
+  if(saved) cart = JSON.parse(saved);
+} catch(e){}
 let wishlist = [];
 let couponDiscount = 0;
 let selectedPayment = "JazzCash";
@@ -2309,6 +2313,7 @@ function updateCartUI(){
   }
   document.getElementById('cartSubtotal').textContent = 'Rs. '+cartSubtotal().toLocaleString();
   document.getElementById('cartTotal').textContent = 'Rs. '+cartSubtotal().toLocaleString();
+  try { localStorage.setItem('csh_cart', JSON.stringify(cart)); } catch(e){}
   updateStickyBar();
 }
 updateCartUI();
