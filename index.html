@@ -1769,6 +1769,7 @@ const PRODUCTS = [
     usage:"Lay flat between masonry courses ensuring full width coverage and overlap joints by 100mm.",
     safety:"Handle rolls carefully to avoid puncture. No special PPE required." },
   { id:4, name:"DPC Roll 9 Inch × 15 Meter – Damp Proof Course", cat:"DPC & Damp Proofing", group:"Waterproofing", price:3500, packing:"9 Inch × 15 Meter", stock:"In Stock", tags:[],
+    url:"/products/dpc-roll-9-inch",
     alt:"9 inch 15 meter DPC roll for rising damp protection",
     img:"image/dpc-roll-9.jpeg", desc:"A 9 Inch × 15 Meter Damp Proof Course (DPC) roll designed to help reduce rising dampness and moisture migration through brickwork, masonry and other structural construction interfaces. A popular DPC size for contractors across Pakistan looking to protect load-bearing walls from moisture ingress.",
     applications:"Load-bearing walls, thicker masonry sections and brickwork requiring reliable damp proofing.",
@@ -2013,7 +2014,10 @@ searchInput.addEventListener('input', ()=>{
 searchSuggest.addEventListener('click', e=>{
   if(e.target.tagName==='SPAN' && e.target.dataset.id){
     searchOverlay.classList.remove('active');
-    openQuickView(parseInt(e.target.dataset.id));
+    const id = parseInt(e.target.dataset.id);
+    const p = PRODUCTS.find(x=>x.id===id);
+    if(p && p.url){ window.location.href = p.url; }
+    else { openQuickView(id); }
   }
 });
 
@@ -2207,10 +2211,21 @@ function renderProducts(filter){
     if(qtyEl) qtyEl.textContent = 1;
     pulseStickyBar();
   }));
-  grid.querySelectorAll('.p-btn[data-act="view"]').forEach(b=>b.addEventListener('click', e=>{ e.stopPropagation(); openQuickView(parseInt(b.dataset.id)); }));
+  grid.querySelectorAll('.p-btn[data-act="view"]').forEach(b=>b.addEventListener('click', e=>{
+    e.stopPropagation();
+    const id = parseInt(b.dataset.id);
+    const p = PRODUCTS.find(x=>x.id===id);
+    if(p && p.url){ window.location.href = p.url; }
+    else { openQuickView(id); }
+  }));
   grid.querySelectorAll('.p-btn[data-act="buy"]').forEach(b=>b.addEventListener('click', e=>{ e.stopPropagation(); buyNow(parseInt(b.dataset.id)); }));
   grid.querySelectorAll('.p-btn[data-act="checkout"]').forEach(b=>b.addEventListener('click', e=>{ e.stopPropagation(); checkoutDirect(parseInt(b.dataset.id)); }));
-  grid.querySelectorAll('.p-card').forEach(c=>c.addEventListener('click', ()=>openQuickView(parseInt(c.dataset.id))));
+  grid.querySelectorAll('.p-card').forEach(c=>c.addEventListener('click', ()=>{
+    const id = parseInt(c.dataset.id);
+    const p = PRODUCTS.find(x=>x.id===id);
+    if(p && p.url){ window.location.href = p.url; }
+    else { openQuickView(id); }
+  }));
 }
 renderProducts('All');
 
